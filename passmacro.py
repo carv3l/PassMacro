@@ -1,16 +1,14 @@
 import tkinter as tk
 import tkinter.font as tkfont
-from pynput.keyboard import Key, Listener
-from pynput import keyboard
-
-
-root = tk.Tk()
+from tkinter import *
 
 
 class App:
 
     def __init__(self, root):
-        root.title("Password Macro")
+        self.root = root
+
+        self.root.title("Password Macro")
         heigth = 720
         width = 1280
         screenheight = root.winfo_screenheight()
@@ -22,43 +20,40 @@ class App:
             (screenheight - heigth) / 2,
         )
         root.geometry(alignstr)
-        # root.resizable(width=False, heigth=False)
+    # root.resizable(width=False, heigth=False)
 
-    # if __name__ == "__main__":
-    #     root = tk.Tk()
-    #     app = App(root)
-    #     root.mainloop()
+        print( round((screenwidth - width)/ 4))
+        print(round((screenwidth - heigth)/ 20))
 
-    def on_press(key):
+        Searchbar = Entry(root,bd =0, text= "Search",font=('arial',40,'bold'),width = 25, bg='lightgrey')
+      
+        Searchbar.place(relx=.5, rely=.1, anchor='center')
+        
 
-        if key == Key.ctrl_l:
-            if key == Key.shift:
-                print("{0} pressed".format(key))
-            # if key == 190:
+        self.SearchString = StringVar(Searchbar, "")
+        Searchbar.config(textvariable = self.SearchString)
 
-    def on_activate():
-        # print("Global hotkey activated!")
-        app = App(root)
-        root.mainloop()
-
-    def for_canonical(f):
-        return lambda k: f(l.canonical(k))
-
-    def on_release(key):
-
-        # print("{0} release".format(key))
-        if key == Key.esc:
-            # Stop listener
-            return False
+        SearchResultBar = Label(root)
+        SearchResultBar.pack()
 
 
-hotkey_en = keyboard.HotKey(keyboard.HotKey.parse("<ctrl>+<shift>+."), App.on_activate)
+            
+        Searchbar.bind('<Return>', self.DisplaySearchResult, add = '+')
+        Searchbar.bind('<FocusOut>', self.DisplaySearchResult, add = '+')
 
-with keyboard.Listener(
-    on_press=App.for_canonical(hotkey_en.press),
-    on_release=App.for_canonical(hotkey_en.press),
-) as l:
-    l.join()
+        
+    def DisplaySearchResult(self, *args):
+        Keyword = self.SearchString.get()
+
+        print(Keyword)
+       # {write some code to search your csv data and get a string to describe the search result, which we'll call SearchResult}
+       # SearchString.set(SearchResult)
+
+if __name__ == "__main__":
+       root = tk.Tk()
+       app = App(root)
+       root.mainloop()
+
 
 
 #  cd .\bitbucket\ ; .\venv\Scripts\activate ; cd '.\Side Projects\' ; py .\passmacro.py
