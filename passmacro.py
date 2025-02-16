@@ -1,6 +1,7 @@
 import tkinter as tk
 import tkinter.font as tkfont
 from tkinter import *
+import json
 
 
 class App:
@@ -21,9 +22,8 @@ class App:
         )
         root.geometry(alignstr)
     # root.resizable(width=False, heigth=False)
-
-        
-
+    
+    
         print( round((screenwidth - width)/ 4))
         print(round((screenwidth - heigth)/ 20))
 
@@ -45,9 +45,15 @@ class App:
 
         
     def DisplaySearchResult(self, *args):
-        Keyword = self.SearchString.get()
+        keyword = self.SearchString.get()
 
-        print(Keyword)
+        print(keyword)
+        with open('info.js') as f:
+            data = json.load(f)
+            #print(d)
+            for i in data:
+                if keyword in i['title']:
+                    print(i['notes'])
        # {write some code to search your csv data and get a string to describe the search result, which we'll call SearchResult}
        # SearchString.set(SearchResult)
 
