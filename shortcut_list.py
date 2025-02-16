@@ -1,4 +1,4 @@
-from pynput.keyboard import Key, Listeneraa
+from pynput.keyboard import Key, Listener
 from pynput import keyboard
 from passmacro import App
 import tkinter as tk
