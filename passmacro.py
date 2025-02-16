@@ -22,13 +22,15 @@ class App:
         root.geometry(alignstr)
     # root.resizable(width=False, heigth=False)
 
+        
+
         print( round((screenwidth - width)/ 4))
         print(round((screenwidth - heigth)/ 20))
 
         Searchbar = Entry(root,bd =0, text= "Search",font=('arial',40,'bold'),width = 25, bg='lightgrey')
       
         Searchbar.place(relx=.5, rely=.1, anchor='center')
-        
+        Searchbar.focus_set()
 
         self.SearchString = StringVar(Searchbar, "")
         Searchbar.config(textvariable = self.SearchString)

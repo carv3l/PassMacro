@@ -1,4 +1,4 @@
-from pynput.keyboard import Key, Listener
+from pynput.keyboard import Key, Listeneraa
 from pynput import keyboard
 from passmacro import App
 import tkinter as tk
@@ -21,6 +21,9 @@ def run_gui():
     root.attributes('-topmost', 1)  # Keep it on top
     root.after(500, lambda: root.attributes('-topmost', 0))
 
+    root.bind("<FocusOut>", lambda event: root.destroy())
+
+
 
     root.mainloop()
 
@@ -33,7 +36,7 @@ def on_activate():
 
 
 def for_canonical(f):
-    return lambda k: f(l.canonical(k))
+    return lambda k: f(l.canonical(k))  
 
 
 def on_release(key):
